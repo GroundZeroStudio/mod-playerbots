@@ -743,6 +743,9 @@ bool TravelPath::shouldMoveToNextPoint(WorldPosition startPos, std::vector<PathN
 
     auto nextP = std::next(p);
 
+    if (nextP == ed)
+        return false;
+
     // We are moving to a area trigger node and want to move to the next teleport node.
     if (p->type == NODE_PORTAL && nextP->type == NODE_PORTAL && p->entry == nextP->entry)
     {

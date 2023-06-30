@@ -100,17 +100,17 @@ bool LfgJoinAction::JoinLFG()
     for (std::vector<uint32>::iterator i = dungeons.begin(); i != dungeons.end(); ++i)
     {
         LFGDungeonEntry const* dungeon = sLFGDungeonStore.LookupEntry(*i);
-        if (!dungeon || (dungeon->type != LFG_TYPE_RANDOM && dungeon->type != LFG_TYPE_DUNGEON && dungeon->type != LFG_TYPE_HEROIC && dungeon->type != LFG_TYPE_RAID))
+        if (!dungeon || (dungeon->TypeID != LFG_TYPE_RANDOM && dungeon->TypeID != LFG_TYPE_DUNGEON && dungeon->TypeID != LFG_TYPE_HEROIC && dungeon->TypeID != LFG_TYPE_RAID))
             continue;
 
         uint32 botLevel = bot->getLevel();
-        if (dungeon->minlevel && botLevel < dungeon->minlevel)
+        if (dungeon->MinLevel && botLevel < dungeon->MinLevel)
             continue;
 
-        if (dungeon->minlevel && botLevel > dungeon->minlevel + 10)
+        if (dungeon->MinLevel && botLevel > dungeon->MinLevel + 10)
             continue;
 
-        if (dungeon->maxlevel && botLevel > dungeon->maxlevel)
+        if (dungeon->MaxLevel && botLevel > dungeon->MaxLevel)
             continue;
 
         selected.push_back(dungeon->ID);
@@ -171,9 +171,11 @@ bool LfgJoinAction::JoinLFG()
     if (roleMask & PLAYER_ROLE_DAMAGE)
         _roles = "DPS";
 
+    /*
     LOG_INFO("playerbots", "Bot {} {}:{} <{}>: queues LFG, Dungeon as {} ({})",
         bot->GetGUID().ToString().c_str(), bot->GetTeamId() == TEAM_ALLIANCE ? "A" : "H",
         bot->getLevel(), bot->GetName().c_str(), _roles, many ? "several dungeons" : dungeon->name[0]);
+    */
 
     /*if (lfgState->IsSingleRole())
     {
