@@ -305,6 +305,7 @@ void RandomPlayerbotFactory::CreateRandomBots()
                                 continue;
                             // if bot is in someone's guild - don't delete it
                             uint32 guildId = sCharacterCache->GetCharacterGuildIdByGuid(guid);
+                            /*
                             if (guildId && !delFriends)
                             {
                                 Guild* guild = sGuildMgr->GetGuildById(guildId);
@@ -313,6 +314,7 @@ void RandomPlayerbotFactory::CreateRandomBots()
                                 if (find(botAccounts.begin(), botAccounts.end(), accountId) == botAccounts.end())
                                     continue;
                             }
+                            */
 
                             Player::DeleteFromDB(guidlow, accId, false, true);       // no need to update realm characters
                         } while (result->NextRow());
