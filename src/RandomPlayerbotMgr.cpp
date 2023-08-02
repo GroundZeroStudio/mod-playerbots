@@ -1264,6 +1264,12 @@ void RandomPlayerbotMgr::IncreaseLevel(Player* bot)
 	PerformanceMonitorOperation* pmo = sPerformanceMonitor->start(PERF_MON_RNDBOT, "IncreaseLevel");
 	uint32 lastLevel = GetValue(bot, "level");
 	uint32 level = bot->getLevel();
+	// 同步等级时将小于最低等级的机器人设到最低等级
+    if (level < sPlayerbotAIConfig->randomBotMinLevel)
+    {
+        level = sPlayerbotAIConfig->randomBotMinLevel;
+        bot->SetLevel(level);
+    }
 	if (lastLevel != level)
 	{
         PlayerbotFactory factory(bot, level);
